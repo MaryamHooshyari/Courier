@@ -1,6 +1,3 @@
-from datetime import datetime
-
-import pytz
 from django.db import models
 
 
@@ -9,8 +6,8 @@ class AbstractIncomeModel(models.Model):
         abstract = True
 
     amount = models.PositiveIntegerField()
-    date = models.DateField(default=datetime.now(pytz.timezone('Asia/Tehran')).date())
-    time = models.TimeField(default=datetime.now(pytz.timezone('Asia/Tehran')).time())
+    date = models.DateField()
+    time = models.TimeField()
     modified = models.DateTimeField(auto_now=True)
     created = models.DateTimeField(auto_now_add=True)
 
