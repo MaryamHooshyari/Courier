@@ -44,7 +44,6 @@ INSTALLED_APPS = [
     # local
     'courier',
     'income',
-    'salary',
 ]
 
 MIDDLEWARE = [
