@@ -1,9 +1,4 @@
-from datetime import datetime
-
-import pytz
 from django.db import models
-
-from salary.models import DailySalary
 
 
 class AbstractIncomeModel(models.Model):
@@ -22,15 +17,6 @@ class TripIncome(AbstractIncomeModel):
 
     def __str__(self):
         return f'trip for {self.courier.name}'
-
-    def save(self, force_insert=False, force_update=False, using=None, update_fields=None):
-        try:
-            daily_obj = DailySalary.objects.get(courier=self.courier, date=self.date)
-            daily_obj.amount += self.amount
-            daily_obj.save()
-        except:
-            DailySalary.objects.create(courier=self.courier, date=self.date, amount=self.amount)
-        super(TripIncome, self).save()
 
 
 class IncomeDeduction(AbstractIncomeModel):
