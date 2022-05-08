@@ -1,4 +1,6 @@
-from django.db import models
+from django.db import models, transaction
+
+from salary.models import DailySalary
 
 
 class AbstractIncomeModel(models.Model):
@@ -10,6 +12,16 @@ class AbstractIncomeModel(models.Model):
     time = models.TimeField()
     modified = models.DateTimeField(auto_now=True)
     created = models.DateTimeField(auto_now_add=True)
+
+    # def save(self, force_insert=False, force_update=False, using=None, update_fields=None):
+    #     with transaction.atomic():
+    #         super(AbstractIncomeModel, self).save()
+    #         try:
+    #             daily_obj = DailySalary.objects.get(courier=self.courier, date=self.date)
+    #             daily_obj.amount += self.amount
+    #             daily_obj.save()
+    #         except:
+    #             DailySalary.objects.create(courier=self.courier, date=self.date, amount=self.amount)
 
 
 class TripIncome(AbstractIncomeModel):
