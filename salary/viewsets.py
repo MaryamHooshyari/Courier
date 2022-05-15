@@ -25,7 +25,7 @@ class DailySalaryViewSet(viewsets.ModelViewSet):
         delta = datetime.timedelta(days=1)
         salary = {}
         try:
-            for courier in Courier.objects.all():  # TODO: add value+annotate in query to group-by instead of this "for"
+            for courier in Courier.objects.all():
                 salary[courier.name] = []
                 from_date = datetime.date(int(from_date_[0]), int(from_date_[1]), int(from_date_[2]))
                 while from_date <= to_date:
